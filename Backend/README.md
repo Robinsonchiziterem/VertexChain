@@ -1,12 +1,12 @@
-# GistPin API
+# VertexChain API
 
-The backend API and on-chain indexer for GistPin. This service is the bridge between the web client and both the Stellar/Soroban blockchain and the Postgres database.
+The backend API and on-chain indexer for VertexChain. This service is the bridge between the web client and both the Stellar/Soroban blockchain and the Postgres database.
 
 ## What This Repo Does
 
 - **Indexes** on-chain events from the `GistRegistry` Soroban contract
 - **Stores** enriched gist data in Postgres + PostGIS for fast geospatial queries
-- **Exposes** a REST API consumed by the GistPin frontend
+- **Exposes** a REST API consumed by the VertexChain frontend
 - **Bridges** to IPFS/Pinata for full gist content storage (the chain only holds a hash)
 
 ---
@@ -70,7 +70,7 @@ Backend/
 - **PostgreSQL 15** with the **PostGIS extension**
 - **npm** (comes with Node.js)
 
-> **Why PostGIS?** The core feature of GistPin is querying gists by distance — *"show me everything within 500m of these coordinates."* PostGIS adds a spatial index that makes this instant, even at scale.
+> **Why PostGIS?** The core feature of VertexChain is querying gists by distance — *"show me everything within 500m of these coordinates."* PostGIS adds a spatial index that makes this instant, even at scale.
 
 ---
 
@@ -79,8 +79,8 @@ Backend/
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/PinSpace-Org/GistPin.git
-cd GistPin/Backend
+git clone https://github.com/PinSpace-Org/VertexChain.git
+cd VertexChain/Backend
 npm install
 ```
 
@@ -90,7 +90,7 @@ npm install
 
 ```bash
 docker run -d \
-  --name gistpin-db \
+  --name vertexchain-db \
   -e POSTGRES_USER=gist \
   -e POSTGRES_PASSWORD=gist \
   -e POSTGRES_DB=gist \

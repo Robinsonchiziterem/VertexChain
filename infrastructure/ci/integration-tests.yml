@@ -33,7 +33,7 @@ jobs:
 
       - name: Run e2e tests
         env:
-          DATABASE_URL: postgresql://gistpin_test:test_password@localhost:5432/gistpin_test
+          DATABASE_URL: postgresql://vertexchain_test:test_password@localhost:5432/vertexchain_test
           NODE_ENV: test
         run: npm run test:e2e
         working-directory: Backend

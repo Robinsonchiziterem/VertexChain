@@ -17,19 +17,19 @@ jobs:
 
       - name: Deploy to inactive environment
         run: |
-          current_env="$(cat /tmp/gistpin-active-environment 2>/dev/null || echo blue)"
+          current_env="$(cat /tmp/vertexchain-active-environment 2>/dev/null || echo blue)"
           if [ "$current_env" = "blue" ]; then target_env="green"; else target_env="blue"; fi
           echo "Deploying new version to ${target_env}"
-          echo "$target_env" > /tmp/gistpin-target-environment
+          echo "$target_env" > /tmp/vertexchain-target-environment
 
       - name: Run smoke tests against inactive environment
         run: |
-          target_env="$(cat /tmp/gistpin-target-environment)"
-          bash infrastructure/scripts/smoke-tests.sh "http://${target_env}.gistpin.internal/health"
+          target_env="$(cat /tmp/vertexchain-target-environment)"
+          bash infrastructure/scripts/smoke-tests.sh "http://${target_env}.vertexchain.internal/health"
 
       - name: Switch traffic to new version
         run: |
-          current_env="$(cat /tmp/gistpin-active-environment 2>/dev/null || echo blue)"
+          current_env="$(cat /tmp/vertexchain-active-environment 2>/dev/null || echo blue)"
           bash infrastructure/scripts/switch-traffic.sh "${current_env}"
 
       - name: Keep old version for rollback window

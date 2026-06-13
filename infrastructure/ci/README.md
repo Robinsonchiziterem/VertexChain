@@ -1,6 +1,6 @@
 # CI/CD Pipelines
 
-Continuous integration and deployment configurations for GistPin.
+Continuous integration and deployment configurations for VertexChain.
 
 ## Overview
 

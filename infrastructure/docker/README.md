@@ -4,7 +4,7 @@ Docker and docker-compose configurations for containerized deployments.
 
 ## Overview
 
-Container definitions for running GistPin services locally and in production.
+Container definitions for running VertexChain services locally and in production.
 
 ## Contents
 

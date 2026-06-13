@@ -1,8 +1,8 @@
 FROM postgres:16-alpine
 
-ENV POSTGRES_USER=gistpin \
-    POSTGRES_PASSWORD=gistpin \
-    POSTGRES_DB=gistpin
+ENV POSTGRES_USER=vertexchain \
+    POSTGRES_PASSWORD=vertexchain \
+    POSTGRES_DB=vertexchain
 
 # Custom init scripts run in alphabetical order on first start
 COPY postgres-init.sql /docker-entrypoint-initdb.d/01-init.sql

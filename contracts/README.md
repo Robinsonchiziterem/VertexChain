@@ -1,6 +1,6 @@
-# GistPin Contracts
+# VertexChain Contracts
 
-On-chain infrastructure for **GistPin** — a location-aware gist platform built on the **Stellar / Soroban** blockchain.
+On-chain infrastructure for **VertexChain** — a location-aware gist platform built on the **Stellar / Soroban** blockchain.
 
 The contracts handle registering gists as verifiable blockchain records, organizing them by geographic location, and supplying metadata for off-chain indexers.
 
@@ -102,7 +102,7 @@ cargo test
 
 ```bash
 stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/gistpin_contracts.wasm \
+  --wasm target/wasm32-unknown-unknown/release/vertexchain_contracts.wasm \
   --network testnet \
   --source <your-identity>
 ```

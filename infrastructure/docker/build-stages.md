@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `docker-build-pipeline.yml` workflow implements a four-stage CI/CD pipeline for building, testing, scanning, and publishing the GistPin backend Docker image.
+The `docker-build-pipeline.yml` workflow implements a four-stage CI/CD pipeline for building, testing, scanning, and publishing the VertexChain backend Docker image.
 
 ## Pipeline Stages
 
@@ -20,7 +20,7 @@ build ──┬── test          ──┐
 
 ## Image Tags
 
-Images pushed to `ghcr.io/<owner>/gistpin`:
+Images pushed to `ghcr.io/<owner>/vertexchain`:
 
 | Tag | Example | When |
 |-----|---------|------|
@@ -51,9 +51,9 @@ FROM node:20-alpine AS production
 
 ```bash
 # Build the production image locally
-docker build --target production -t gistpin-backend:local ./Backend
+docker build --target production -t vertexchain-backend:local ./Backend
 
 # Run the push script manually (dry-run)
-IMAGE=ghcr.io/org/gistpin TAG=sha-abc123 BRANCH=main \
+IMAGE=ghcr.io/org/vertexchain TAG=sha-abc123 BRANCH=main \
   bash infrastructure/ci/scripts/docker-push.sh
 ```
