@@ -1,74 +1,23 @@
 'use client';
 
-import { useEffect, useRef, useState, memo } from 'react';
+import { memo } from 'react';
 import {
   TrendingUp,
   TrendingDown,
   Minus,
-  FileText,
-  Users,
-  BarChart2,
-  Activity,
-  type LucideIcon,
 } from 'lucide-react';
-
-// ── Animated counter ──────────────────────────────────────────────────────────
-
-function useCountAnimation(target: number, duration = 1200): number {
-  const [display, setDisplay] = useState(0);
-  const rafRef = useRef<number | null>(null);
-  const initialised = useRef(false);
-
-  useEffect(() => {
-    const start = initialised.current ? display : 0;
-    initialised.current = true;
-    const diff = target - start;
-    if (diff === 0) return;
-
-    const startTime = performance.now();
-
-    const step = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      setDisplay(Math.round(start + diff * eased));
-      if (progress < 1) rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => {
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target]);
-
-  return display;
-}
-
-// ── Types ─────────────────────────────────────────────────────────────────────
-
-export interface KPICardProps {
-  title: string;
-  /** Raw numeric value to count up to */
-  value: number;
-  /** Percentage change vs previous period (positive = up, negative = down) */
-  change: number;
-  /** Custom display formatter — defaults to locale-formatted integer */
-  format?: (n: number) => string;
-  icon: LucideIcon;
-  accentColor?: string;
-}
-
-// ── KPICard ───────────────────────────────────────────────────────────────────
+import { useCountAnimation } from '@/hooks/useCountAnimation';
+import { KPI_DATA, type KPICardProps } from '@/lib/kpi-data';
 
 export const KPICard = memo(function KPICard({
   title,
   value,
   change,
-  format = (n) => n.toLocaleString(),
+  format = (n: number) => n.toLocaleString(),
   icon: Icon,
   accentColor = '#6366f1',
 }: KPICardProps) {
-  const displayValue = useCountAnimation(value);
+  const displayValue = useCountAnimation(value, 1200);
   const isUp = change > 0;
   const isFlat = change === 0;
 
@@ -152,42 +101,6 @@ export const KPICard = memo(function KPICard({
     </div>
   );
 });
-
-// ── Default KPI dataset ───────────────────────────────────────────────────────
-
-const KPI_DATA: KPICardProps[] = [
-  {
-    title: 'Total Gists',
-    value: 1_284,
-    change: 12.5,
-    icon: FileText,
-    accentColor: '#6366f1',
-  },
-  {
-    title: 'Active Users',
-    value: 847,
-    change: 8.3,
-    icon: Users,
-    accentColor: '#3b82f6',
-  },
-  {
-    title: 'Growth Rate',
-    value: 23,
-    change: 5.1,
-    format: (n) => `${n}%`,
-    icon: BarChart2,
-    accentColor: '#22c55e',
-  },
-  {
-    title: 'Engagement',
-    value: 3_291,
-    change: -2.8,
-    icon: Activity,
-    accentColor: '#f59e0b',
-  },
-];
-
-// ── KPIGrid ───────────────────────────────────────────────────────────────────
 
 export default function KPIGrid() {
   return (

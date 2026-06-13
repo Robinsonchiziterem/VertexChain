@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import { estimateSize, newCondition, type Condition, type Segment } from '@/lib/segment-data';
+
+export type { Condition, Segment };
+export { estimateSize, exportSegmentCsv } from '@/lib/segment-data';
 import ConditionRow from '@/components/ConditionRow';
 
 interface SegmentBuilderProps {

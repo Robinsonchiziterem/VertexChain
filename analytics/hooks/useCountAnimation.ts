@@ -2,17 +2,18 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-/** Animates `display` toward `target` over ~500 ms using ease-out cubic. */
-export function useCountAnimation(target: number): number {
+/** Animates `display` toward `target` over the given duration using ease-out cubic. */
+export function useCountAnimation(target: number, duration = 500): number {
   const [display, setDisplay] = useState(target);
   const rafRef = useRef<number | null>(null);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    const start = display;
+    const start = initialized.current ? display : 0;
+    initialized.current = true;
     const diff = target - start;
     if (diff === 0) return;
 
-    const duration = 500;
     const startTime = performance.now();
 
     const step = (now: number) => {
@@ -28,7 +29,7 @@ export function useCountAnimation(target: number): number {
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target]);
+  }, [target, duration]);
 
   return display;
 }
