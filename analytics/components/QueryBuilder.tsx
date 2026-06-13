@@ -1,38 +1,20 @@
 'use client';
 import { useState } from 'react';
+import {
+  DIMENSIONS,
+  METRICS,
+  FILTER_OPS,
+  nextFilterId,
+  nextQueryId,
+  type Dimension,
+  type Metric,
+  type FilterOp,
+  type QueryFilter,
+  type SavedQuery,
+  type QueryBuilderProps,
+} from '@/lib/query-builder-types';
 
-const DIMENSIONS = ['Date', 'Location', 'Category'] as const;
-const METRICS = ['Count', 'Average', 'Sum'] as const;
-const FILTER_OPS = ['Greater than', 'Less than', 'Equals'] as const;
-
-type Dimension = (typeof DIMENSIONS)[number];
-type Metric = (typeof METRICS)[number];
-type FilterOp = (typeof FILTER_OPS)[number];
-
-export interface QueryFilter {
-  id: number;
-  dimension: Dimension;
-  op: FilterOp;
-  value: string;
-}
-
-export interface SavedQuery {
-  id: number;
-  name: string;
-  dimensions: Dimension[];
-  metrics: Metric[];
-  filters: QueryFilter[];
-}
-
-export interface QueryBuilderProps {
-  onRun?: (dimensions: Dimension[], metrics: Metric[], filters: QueryFilter[]) => void;
-  onSave?: (query: SavedQuery) => void;
-  savedQueries?: SavedQuery[];
-  onLoadQuery?: (query: SavedQuery) => void;
-}
-
-let nextFilterId = 1;
-let nextQueryId = 1;
+export type { QueryFilter, SavedQuery, QueryBuilderProps };
 
 export default function QueryBuilder({
   onRun,
