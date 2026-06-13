@@ -37,7 +37,7 @@
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/PinSpace-Org/VertexChain.git
+git clone https://github.com/VertexChainLabs/VertexChain.git
 cd VertexChain
 ```
 

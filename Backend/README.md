@@ -79,7 +79,7 @@ Backend/
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/PinSpace-Org/VertexChain.git
+git clone https://github.com/VertexChainLabs/VertexChain.git
 cd VertexChain/Backend
 npm install
 ```

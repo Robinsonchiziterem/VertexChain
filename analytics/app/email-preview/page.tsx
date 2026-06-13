@@ -15,7 +15,7 @@ export default function EmailPreviewPage() {
   const mailtoHref = useMemo(() => {
     const subject = encodeURIComponent('VertexChain test analytics report');
     const body = encodeURIComponent(
-      'Hi,\n\nThis is a mock test send for the VertexChain analytics email report.\n\nOpen the dashboard: https://github.com/PinSpace-Org/VertexChain',
+      'Hi,\n\nThis is a mock test send for the VertexChain analytics email report.\n\nOpen the dashboard: https://github.com/VertexChainLabs/VertexChain',
     );
     return `mailto:${recipient}?subject=${subject}&body=${body}`;
   }, [recipient]);
