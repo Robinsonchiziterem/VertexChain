@@ -3,50 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   type GeoRegion,
-  type GistPoint,
   type LatLng,
   computeRegionStats,
   filterGistsInRegion,
   loadRegions,
   saveRegions,
 } from '@/lib/geofencing';
-
-// ---------------------------------------------------------------------------
-// Mock gist data
-// ---------------------------------------------------------------------------
-const MOCK_GISTS: GistPoint[] = [
-  { id: '1', lat: 37.775, lng: -122.418, text: 'Great coffee here!',       sentiment: 'positive' },
-  { id: '2', lat: 37.776, lng: -122.419, text: 'Broken streetlight.',       sentiment: 'negative' },
-  { id: '3', lat: 37.774, lng: -122.417, text: 'Farmers market today.',     sentiment: 'neutral'  },
-  { id: '4', lat: 37.780, lng: -122.410, text: 'Amazing mural on 5th.',     sentiment: 'positive' },
-  { id: '5', lat: 37.770, lng: -122.425, text: 'Road closed ahead.',        sentiment: 'negative' },
-  { id: '6', lat: 37.778, lng: -122.415, text: 'New park bench installed.', sentiment: 'neutral'  },
-  { id: '7', lat: 37.773, lng: -122.420, text: 'Loud construction noise.',  sentiment: 'negative' },
-  { id: '8', lat: 37.777, lng: -122.413, text: 'Free yoga in the park!',    sentiment: 'positive' },
-];
-
-// ---------------------------------------------------------------------------
-// Simple SVG canvas for polygon drawing
-// ---------------------------------------------------------------------------
-const CANVAS_W = 600;
-const CANVAS_H = 360;
-const LAT_MIN = 37.765, LAT_MAX = 37.785;
-const LNG_MIN = -122.430, LNG_MAX = -122.405;
-
-function toCanvas(p: LatLng): [number, number] {
-  const x = ((p.lng - LNG_MIN) / (LNG_MAX - LNG_MIN)) * CANVAS_W;
-  const y = CANVAS_H - ((p.lat - LAT_MIN) / (LAT_MAX - LAT_MIN)) * CANVAS_H;
-  return [x, y];
-}
-
-function fromCanvas(x: number, y: number): LatLng {
-  return {
-    lng: (x / CANVAS_W) * (LNG_MAX - LNG_MIN) + LNG_MIN,
-    lat: ((CANVAS_H - y) / CANVAS_H) * (LAT_MAX - LAT_MIN) + LAT_MIN,
-  };
-}
-
-const SENTIMENT_COLOR = { positive: '#16a34a', negative: '#dc2626', neutral: '#6b7280' };
+import { MOCK_GISTS, CANVAS_W, CANVAS_H, SENTIMENT_COLOR, toCanvas, fromCanvas } from '@/lib/geofence-data';
 
 // ---------------------------------------------------------------------------
 // Component
