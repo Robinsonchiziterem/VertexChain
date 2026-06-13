@@ -12,9 +12,6 @@ export default function HeaderLogo({ expanded = true }: HeaderLogoProps) {
         alt="VertexChain logo"
         width={28}
         height={28}
-        sizes="28px"
-        placeholder="blur"
-        blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIiBmaWxsPSJub25lIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxNiIgZmlsbD0iIzYzNjZmMSIvPjwvc3ZnPg=="
         priority
       />
       {expanded && (
