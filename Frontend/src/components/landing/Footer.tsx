@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function Footer() {
   return (
     <footer className="bg-[--footer-bg] border-t border-[--border-color]">
@@ -6,7 +8,7 @@ export function Footer() {
           <p className="text-sm text-[--text-muted]">
             &copy; {new Date().getFullYear()} VertexChain. Powered by the Flare Network.
           </p>
-          <div className="flex items-center gap-6">
+          <nav aria-label="Footer navigation" className="flex items-center gap-6">
             <Link href="/privacy" className="text-sm text-[--text-muted] hover:text-[--text-primary] transition-colors">
               Privacy
             </Link>
@@ -16,7 +18,7 @@ export function Footer() {
             <Link href="/docs" className="text-sm text-[--text-muted] hover:text-[--text-primary] transition-colors">
               Docs
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
     </footer>
