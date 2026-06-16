@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 export default function MapLoader() {
   const Map = useMemo(
     () =>
-      dynamic(() => import('components/map/Map'), {
+      dynamic(() => import('@/components/map/Map'), {
         loading: () => (
           <div role="status" aria-live="polite" className="flex items-center justify-center h-64 text-gray-400">
             <span>Map is loading...</span>
