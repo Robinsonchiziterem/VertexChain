@@ -25,6 +25,7 @@ on:
       - LICENSE
       - CODE_OF_CONDUCT.md
       - CONTRIBUTING.md
+  workflow_dispatch: {}
 
 # Cancel any previous in-progress run for the same ref so we don't burn
 # runner minutes on superseded pushes while a PR is iterating.
@@ -179,3 +180,18 @@ jobs:
       # No `terraform init` needed: `fmt -check` only inspects source files.
       - name: terraform fmt -check
         run: terraform fmt -check -recursive
+
+  # Minimal dispatch probe: lets `gh workflow run ci.yml --ref <sha>` register
+  # and execute one no-op job to confirm the YAML parses for GitHub's runner.
+  # Safe to keep long-term; it's free and confirms the workflow is dispatchable
+  # from any contributor's machine via PAT. The 5 real code/CI jobs above are
+  # unaffected.
+  smoke-dispatch:
+    name: Smoke dispatch probe
+    runs-on: ubuntu-latest
+    steps:
+      - name: prove ci.yml registered
+        run: |
+          echo "ci.yml dispatched from ${{ github.ref }}"
+          echo "actor=${{ github.actor }}"
+          echo "sha=${{ github.sha }}"
